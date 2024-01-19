@@ -94,10 +94,10 @@ public class MQTTClient : MonoBehaviour {
         // string value = jsonNode["command"].ToString().Trim('"');
 
         string payload = Encoding.UTF8.GetString (e.ApplicationMessage.Payload);
-        string[] datas = payload.Split (' ');
+        char[] datas = payload.ToCharArray ();
         // Have to rearrange the array / pins based on the value
         for (int i = 0; i < datas.Length; i++)
-            Global.datas[i] = getValue (datas, positionMapper[i]);
+            Global.datas[i] = datas[positionMapper[i] - 1] == '1' ? 0 : 1;
 
     }
 
